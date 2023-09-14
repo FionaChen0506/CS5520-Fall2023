@@ -2,11 +2,11 @@ import { View, Text } from 'react-native'
 import React from 'react'
 
 
-const Header = (props) => {
-    console.log(props.appName)
+const Header = ({appName}) => {
+    console.log(appName)
   return (
     <View>
-      <Text>Welcome to {props.appName}</Text>
+      <Text>Welcome to {appName}</Text>
     </View>
   )
 }
