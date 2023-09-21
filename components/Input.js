@@ -1,4 +1,4 @@
-import { Button, Modal, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Button, Modal, StyleSheet, Text, TextInput, View, Image } from 'react-native'
 import { useState } from 'react';
 import React from 'react'
 
@@ -26,6 +26,8 @@ const Input = ({changedHandler, modalVisibility, hideModal}) => {
   return (
     <Modal visible={modalVisibility}>
       <View style={styles.container}>
+        <Image source={{url:"https://cdn-icons-png.flaticon.com/512/2617/2617812.png"}} style={styles.image} />
+        <Image source={require ("../assets/pic1.png")} style={{width:100, height:100,}} />
         <TextInput
           style={styles.input}
           onChangeText={changeTextHandler}
@@ -52,4 +54,8 @@ const styles = StyleSheet.create({
         borderWidth:1,
         width: 200,
       },
+    image: {
+      width:100,
+      height:100,
+    },
 })
