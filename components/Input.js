@@ -13,6 +13,9 @@ const Input = ({changedHandler}) => {
     function confirmHandler(){
         //call a function that is passed from app.js and pass the text via it
         changedHandler(text);
+        // clear the textinput
+        setText("")
+
     }
   return (
     <View>
