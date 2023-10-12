@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, Button, View } from "react-native";
+import PressableButton from "./PressableButton";
 
 // Pass the goal object we want to display its text as a prop to GoalItem.js
 const GoalItem = ({goal, deleteGoal}) => {
@@ -8,13 +9,34 @@ const GoalItem = ({goal, deleteGoal}) => {
         deleteGoal(goal.key);
         console.log("delete button pressed: ", goal.text);
     }
+
+    function goalPressed () {
+        pressHandler(goal.key);
+        
+    }
+
     return (
-        <>
-        <View style={styles.goalContainer}>
-            <Text style={styles.text}>{goal.text}</Text>
-            <Button style={[styles.deleteButton]} color="black" title="X" onPress={deleteHandler}/>
-        </View>
-        </>
+        // <>
+        // <View style={styles.goalContainer}>
+        //     <Text style={styles.text}>{goal.text}</Text>
+        //     <Button style={[styles.deleteButton]} color="black" title="X" onPress={deleteHandler}/>
+        // </View>
+        // </>
+        <PressableButton 
+        pressedFunction={goalPressed} 
+        pressedStyle={[styles.goalContainer, {backgroundColor: '#add', opacity: 0.5}]}
+        defaultStyle={[styles.goalContainer, {backgroundColor: '#aaa', opacity: 1}]}
+        >
+        <Text style={styles.text}>{goal.text}</Text>
+        {/* <Button style={[styles.deleteButton]} color="black" title="X" onPress={deleteHandler}/> */}
+        <PressableButton 
+            pressedFunction={deleteHandler} 
+            pressedStyle={{backgroundColor: "#a2a", padding: 5}}
+            defaultStyle={{backgroundColor: "#a09"}}
+            >
+            <Text>X</Text>
+        </PressableButton>
+        </PressableButton>
     )
 }
 
@@ -41,7 +63,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         padding: 15,
         overflow: 'hidden',
-        backgroundColor: '#aaa',
     }
 })
 
