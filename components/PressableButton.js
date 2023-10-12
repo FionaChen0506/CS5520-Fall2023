@@ -13,11 +13,11 @@ const styles = StyleSheet.create({
     styleDefault: {
         backgroundColor: '#aaa',
         flexDirection: 'row',
-        marginBottom: 20,
+        marginBottom: 30,
         alignItems: 'center',
-        justifyContent: 'space-between',
+        //justifyContent: 'space-between',
         borderRadius: 5,
-        padding: 10,
+        padding: 5,
     },
 });
 
