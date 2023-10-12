@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, StyleSheet, Button, View } from "react-native";
 import PressableButton from "./PressableButton";
+import { EvilIcons } from '@expo/vector-icons';
 
 // Pass the goal object we want to display its text as a prop to GoalItem.js
 const GoalItem = ({goal, deleteGoal}) => {
@@ -32,9 +33,10 @@ const GoalItem = ({goal, deleteGoal}) => {
         <PressableButton 
             pressedFunction={deleteHandler} 
             pressedStyle={{backgroundColor: "#a2a", padding: 5}}
-            defaultStyle={{backgroundColor: "#a09"}}
+            defaultStyle={{backgroundColor: "#b59"}}
             >
-            <Text>X</Text>
+            {/* <Text>X</Text> */}
+            <EvilIcons name="trash" size={30} color="black" backgroundColor="white" />
         </PressableButton>
         </PressableButton>
     )
