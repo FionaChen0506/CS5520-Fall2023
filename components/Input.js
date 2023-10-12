@@ -1,6 +1,7 @@
 import { Button, Modal, StyleSheet, Text, TextInput, View, Image } from 'react-native'
 import { useState } from 'react';
-import React from 'react'
+import React from 'react';
+
 
 const Input = ({changedHandler, modalVisibility, hideModal}) => {
     const [text, setText] = useState("")
@@ -33,8 +34,11 @@ const Input = ({changedHandler, modalVisibility, hideModal}) => {
           onChangeText={changeTextHandler}
           value={text}
           />
-          <Button title="confirm" onPress={confirmHandler} />
-          <Button title="Cancel" onPress={cancelHandler}/>
+          <View style={styles.buttonContainer}>
+            <Button style={styles.button} color="blue"
+            title="Confirm" onPress={confirmHandler} />
+            <Button style={styles.button} color="red" title="Cancel" onPress={cancelHandler}/>
+          </View>
       </View>
     </Modal>
   )
@@ -45,17 +49,22 @@ export default Input
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ccc',
     alignItems: 'center',
     justifyContent: 'center',
   },
     input:{
-        borderColor:"lightblue",
+        borderColor:"blue",
         borderWidth:1,
         width: 200,
       },
     image: {
       width:100,
       height:100,
+    },
+    buttonContainer: {flexDirection:'row', marginTop:15},
+    button:{
+      marginHorizontal:10,
+      width:"30%",
     },
 })

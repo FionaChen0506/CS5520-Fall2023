@@ -1,12 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { StyleSheet, Text, FlatList, Scroll, ScrollView, TextInput, View, Button, SafeAreaView } from 'react-native';
 import Header from './components/Header';
 import { useState } from 'react';
 import Input from './components/Input';
+import GoalItem from './components/GoalItem';
 
 export default function App() {
   const [text, setText] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [goals, setGoals] = useState([]);
   const name = "My awesome APP"
   //update this callback function to receive the changed text and store it in state variable
   // function changeTextHandler(changedText){
@@ -16,6 +18,8 @@ export default function App() {
 
   function changedDataHandler(data){
     console.log("call back function called", data);
+    const newGoal = {text: data, key: Math.random()};
+    setGoals((prevGoals) => {return [...prevGoals, newGoal]});
     setText(data);
   }
 
@@ -26,22 +30,37 @@ export default function App() {
   function makeModalInvisible(){
     setIsModalVisible(false)
   }
+
+  const goalDeleteHandler = (goalKey) => {
+    setGoals((prevGoals) => {
+      return prevGoals.filter((goal) => goal.key !== goalKey);
+    })
+  }
   return (
-    <View style={styles.container}>
+    
+    <SafeAreaView style={styles.container}>
       {/* <Text>Open up App.js to start working on {name}!</Text> */}
       {/* use Header component and pass a prop to it with the name variable as value*/}
-      <Header appName={name}/>
-      <StatusBar style="auto" />
+      <View style={styles.topContainer}>
+        <Header appName={name}/>
+        <StatusBar style="auto" />
 
-      <Input changedHandler={changedDataHandler}
-              modalVisibility={isModalVisible}
-              hideModal={makeModalInvisible}/>
-      <Button title="Add a goal" onPress={makeModalVisible}/>
+        <Input changedHandler={changedDataHandler}
+                modalVisibility={isModalVisible}
+                hideModal={makeModalInvisible}/>
+        <Button title="Add a goal" onPress={makeModalVisible}/>
+      </View>
     
-      {/* show what user's input is */}
-      {/* this part is ovewritten by the modal temporarily */}
-      <Text>{text}</Text> 
-    </View>
+      <View style={styles.bottomContainer}>
+        {/* show what user's input is */}
+        {/* this part is ovewritten by the modal temporarily */}
+        {/* <Text>{text}</Text>  */}
+        <FlatList 
+          data={goals} 
+          renderItem={(itemData) => <GoalItem goal={itemData.item} deleteGoal={goalDeleteHandler} />}  
+        />
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -49,7 +68,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    // alignItems: 'center',
     justifyContent: 'center',
   },
 
@@ -57,5 +76,15 @@ const styles = StyleSheet.create({
     borderColor:"lightblue",
     borderWidth:1,
     width: "50%",
+  }, 
+  topContainer:{
+    flex:1,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+  },
+  bottomContainer:{
+    flex:4,
+    backgroundColor:"#b59",
+    alignItems:"center",
   },
 });
