@@ -4,8 +4,11 @@ import Header from './Header';
 import { useState } from 'react';
 import Input from './Input';
 import GoalItem from './GoalItem';
+import { database } from '../firebase/FirebaseSetup';
 
 export default function Home({navigation}) {
+  console.log("database initilized fine")
+  console.log(database)
   const [text, setText] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [goals, setGoals] = useState([]);
