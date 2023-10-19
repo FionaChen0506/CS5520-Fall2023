@@ -39,7 +39,7 @@ export default function Home({navigation}) {
 
   const goalPressHandler = (goalObject) => {
     //navigation.navigate('Details');
-    navigation.navigate('Details', {goalItem:goalObject})
+    navigation.navigate('Details', {goalItem: goalObject})
   }
   return (
     
